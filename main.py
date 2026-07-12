@@ -10,6 +10,7 @@ from api.routers import api_router
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Setup actions on startup
+    settings.validate_ai_config()
     yield
     # Cleanup actions on shutdown
 
