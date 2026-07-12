@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Font (Inter) is loaded via index.html preconnect ── */
+
+@layer base {
+  :root {
+    /* Light Mode Tokens */
+    --color-bg: #F8FAFC;
+    --color-surface: rgba(255,255,255,0.68);
+    --color-border: rgba(255,255,255,0.25);
+    --color-text-primary: #0F172A;
+    --color-text-secondary: #475569;
+    --color-muted: #94A3B8;
+    --color-primary: #0F766E;
+    --color-secondary: #14532D;
+    --color-accent: #2563EB;
+    --color-success: #16A34A;
+    --color-warning: #D97706;
+    --color-danger: #DC2626;
+    --teal-subtle: rgba(15, 118, 110, 0.05);
+    --evergreen-subtle: rgba(20, 83, 45, 0.03);
+  }
+
+  [data-theme='dark'] {
+    /* Dark Mode Tokens */
+    --color-bg: #0A0F14;
+    --color-surface: rgba(15,23,42,0.75);
+    --color-border: rgba(255,255,255,0.08);
+    --color-text-primary: #F1F5F9;
+    --color-text-secondary: #94A3B8;
+    --color-muted: #475569;
+    --teal-subtle: rgba(15, 118, 110, 0.08);
+    --evergreen-subtle: rgba(20, 83, 45, 0.06);
+  }
+
+  body {
+    @apply antialiased font-sans;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  * {
+    /* Smooth transitions for theme switching */
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
+  }
+}
+
+@layer components {
+  /* ── 7-Layer Background System ── */
+  .premium-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-color: var(--color-bg);
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"),
+      radial-gradient(circle at 15% 50%, var(--teal-subtle) 0%, transparent 50%),
+      radial-gradient(circle at 85% 30%, var(--evergreen-subtle) 0%, transparent 50%);
+    background-size: 150px, 100% 100%, 100% 100%;
+  }
+
+  .premium-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 70% 80%, rgba(15, 118, 110, 0.04) 0%, transparent 40%),
+      radial-gradient(circle at 30% 20%, rgba(37, 99, 235, 0.03) 0%, transparent 40%);
+    filter: blur(40px);
+  }
+
+  /* ── Glass Card ── */
+  .glass {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(18px);
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.5),
+      0 4px 30px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .glass:hover {
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.6),
+      0 8px 32px rgba(0,0,0,0.08);
+    border-color: rgba(255,255,255,0.4);
+  }
+
+  [data-theme='dark'] .glass {
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.05),
+      0 4px 30px rgba(0,0,0,0.3);
+  }
+
+  [data-theme='dark'] .glass:hover {
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.08),
+      0 8px 32px rgba(0,0,0,0.4);
+  }
+}
+
+@layer utilities {
+  /* ── Shimmer animation for Skeleton loaders ── */
+  @keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(0,0,0,0.04) 25%,
+      rgba(0,0,0,0.08) 50%,
+      rgba(0,0,0,0.04) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+  }
+
+  [data-theme='dark'] .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255,255,255,0.03) 25%,
+      rgba(255,255,255,0.07) 50%,
+      rgba(255,255,255,0.03) 75%
+    );
+    background-size: 200% 100%;
+  }
+}
