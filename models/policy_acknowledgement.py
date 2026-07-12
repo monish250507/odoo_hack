@@ -3,7 +3,7 @@ from typing import Optional
 from datetime import datetime
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import String, DateTime, Index
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Uuid as UUID
 from models.base import FullBaseModel
 
 class PolicyAcknowledgement(FullBaseModel):

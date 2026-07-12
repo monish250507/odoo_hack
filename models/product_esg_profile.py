@@ -2,7 +2,7 @@ import uuid
 from typing import Optional
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import String, Float, Text, Index
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Uuid as UUID
 from models.base import FullBaseModel
 
 class ProductESGProfile(FullBaseModel):

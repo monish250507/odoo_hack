@@ -4,7 +4,7 @@ from typing import Optional
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import DateTime, Boolean, Integer
 from sqlalchemy.sql import func
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Uuid as UUID
 
 
 class Base(DeclarativeBase):
