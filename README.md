@@ -37,15 +37,11 @@
 17. [Project Workflow](#project-workflow)
 18. [Configuration](#configuration)
 19. [Local Development](#local-development)
-20. [Production Deployment](#production-deployment)
-21. [Screenshots](#screenshots)
-22. [Testing](#testing)
-23. [Performance Optimizations](#performance-optimizations)
-24. [Future Roadmap](#future-roadmap)
-25. [Contribution Guide](#contribution-guide)
-26. [License](#license)
-27. [Authors](#authors)
-28. [Acknowledgements](#acknowledgements)
+20. [Testing](#testing)
+21. [Performance Optimizations](#performance-optimizations)
+22. [License](#license)
+23. [Authors](#authors)
+24. [Acknowledgements](#acknowledgements)
 
 ---
 
@@ -171,22 +167,28 @@ Built on FastAPI, React, PostgreSQL, and Docker, EcoSphere is scalable, secure, 
 ## 🏗️ System Architecture
 
 ```mermaid
-architecture-beta
-    group api(cloud)[Backend API]
-    group db(database)[Database]
-    group ui(computer)[Frontend]
-    group ai(cloud)[AI Layer]
+flowchart TD
+    subgraph UI [Frontend]
+        ReactUI[React UI]
+    end
 
-    service frontend(internet)[React UI] in ui
-    service fastapi(server)[FastAPI Server] in api
-    service postgres(database)[PostgreSQL] in db
-    service langgraph(server)[LangGraph Orchestrator] in ai
-    service llm(cloud)[OpenRouter LLMs] in ai
+    subgraph API [Backend API]
+        FastAPI[FastAPI Server]
+    end
 
-    frontend:R --> L:fastapi
-    fastapi:R --> L:postgres
-    fastapi:R --> L:langgraph
-    langgraph:R --> L:llm
+    subgraph DB [Database]
+        PostgreSQL[(PostgreSQL)]
+    end
+
+    subgraph AI [AI Layer]
+        LangGraph[LangGraph Orchestrator]
+        LLM[OpenRouter LLMs]
+    end
+
+    ReactUI <--> FastAPI
+    FastAPI <--> PostgreSQL
+    FastAPI <--> LangGraph
+    LangGraph <--> LLM
 ```
 
 ---
@@ -444,31 +446,6 @@ LANGCHAIN_API_KEY=your_langsmith_key
 
 ---
 
-## 🚀 Production Deployment
-
-1. Configure production environment variables.
-2. Build and run via Docker Compose:
-   ```bash
-   docker-compose up -d --build
-   ```
-3. Ensure the database volume is backed up.
-4. Set up a reverse proxy (Nginx/Traefik) with SSL for the API and Frontend.
-
----
-
-## 📸 Screenshots
-
-*(Placeholders - Add actual screenshots here)*
-
-| Dashboard | Leaderboard |
-|-----------|-------------|
-| ![Dashboard](#) | ![Leaderboard](#) |
-
-| AI Recommendations | Environmental Log |
-|-------------------|-------------------|
-| ![Recommendations](#) | ![Log](#) |
-
----
 
 ## 🧪 Testing
 
@@ -487,24 +464,6 @@ LANGCHAIN_API_KEY=your_langsmith_key
 
 ---
 
-## 🗺️ Future Roadmap
-
-| Phase | Timeline | Features |
-|-------|----------|----------|
-| **Short Term** | 1-3 Months | Real-time notifications, UI polishing, more AI agents. |
-| **Medium Term**| 3-6 Months | Mobile App, advanced export options (PDF reports). |
-| **Long Term**  | 6-12 Months| Integration with external IoT sensors for automatic carbon tracking. |
-
----
-
-## 🤝 Contribution Guide
-
-- **Branch Strategy:** Feature branching (`feature/your-feature-name`).
-- **Coding Standards:** Follow PEP 8 for Python; use `oxlint` and Prettier for Frontend.
-- **Pull Requests:** Require at least one approval and passing tests.
-- **Commit Messages:** Use conventional commits (`feat:`, `fix:`, `docs:`).
-
----
 
 ## 📄 License
 
