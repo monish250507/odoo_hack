@@ -38,7 +38,7 @@ export const Dashboard = () => {
   const stats = [
     {
       label: 'Total ESG Score',
-      value: dashData?.esg_score ?? '84.2',
+      value: dashData?.esg_score?.average_score ?? '84.2',
       change: '+2.4%',
       variant: 'success' as const,
       icon: <Zap className="w-4 h-4 text-primary" />,
